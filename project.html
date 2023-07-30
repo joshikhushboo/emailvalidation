@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <style type="text/css">
+        body {
+            font-size: 25px;
+            background-color: rgb(43, 139, 153);
+        }
+        
+        label {
+            position: relative;
+            top: 4px;
+            width: 400px;
+            width: 150px;
+            float: left;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            margin-left: 5px;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+        
+        input {
+            width: 300px;
+            border: 2px solid grey;
+            padding: 5px 5px 12px 10px;
+            font-size: 25px;
+            border-radius: 5px;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            margin-top: 5px;
+        }
+        
+        #wrap {
+            width: 500px;
+            margin: 0 auto;
+            background-color: rgb(180, 171, 171);
+        }
+        
+        .form-element {
+            margin-bottom: 10px;
+        }
+        
+        #submitButton {
+            width: 130px;
+            margin-left: 160px;
+        }
+        
+        #errorMessage {
+            color: red;
+            font-size: 90%!important;
+        }
+        
+        #successMessage {
+            color: green;
+            font-size: 90% ! important;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrap">
+        <div id="errorMessage"></div>
+        <div id="successMessage"> you did it ! congrats</div>
+        <div class="form-element">
+            <label for="email">EMail </label>
+            <input type="text" name="email" id="email" placeholder="eg.yourname@gmail.com ">
+        </div>
+        <div class="form-element">
+            <label for="phone">Telephone</label>
+            <input type="text " name="phone" id="phone" placeholder="0123456789 ">
+        </div>
+        <div class="form-element">
+            <label for="password">password</label>
+            <input type="password" name="password" id="password">
+        </div>
+        <div class="form-element">
+            <label for="passwordConfirm">confirm password</label>
+            <input type="password" name="passwordConfirm" id="password">
+        </div>
+        <div class="form-element">
+            <input type="submit" id="submitButton" value="sign Up">
+        </div>
+        <script type="text/javascript">
+            function isEmail(email) {
+                var emailExp = new RegExp(/^\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b$/i);
+
+                return emailExp.test(email);
+            }
+            $("#submitButton").click(function() {
+                var errorMessage = " ";
+                var fieldMissing = " ";
+                if ($("#email").val == "") {
+                    fieldMissing += "<br>EMail";
+                }
+                if ($("#phone").val == "") {
+                    fieldMissing += "<br>phone";
+                }
+                if ($("#password").val == "") {
+                    fieldMissing += "<br>passowrd";
+                }
+                if ($("#passwordConfirm").val == "") {
+                    fieldMissing += "<br>confirm password";
+                }
+                if (fieldMissing != "") {
+                    errorMessage += "<p> the following field(S) are missing:" + fieldMissing;
+                }
+
+
+                if (isEmail($("#email").val()) != true) {
+                    errorMessage += "your email address isnot valid";
+
+                }
+                if ($.isNumeric($("#phone").val()) != true) {
+                    errorMessage += "<p> not numeric";
+                }
+                if ($("#password").val() != $("#passwordConfirm").val()) {
+                    errorMessage += "<p>your password dont match";
+                }
+                if (errorMessage != "") {
+                    $("#errorMessage").html(errorMessage);
+                } else {
+                    $("#successMessage").show();
+                    $("#errorMessage").hide();
+                }
+
+            });
+        </script>
+</body>
+</div>
+</body>
+
+</html>
